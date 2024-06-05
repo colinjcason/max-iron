@@ -1,31 +1,27 @@
-import prisma from "@/lib/prisma"
-import Link from "next/link"
+import { Button } from "@/components/ui/button";
+import Link from "next/link";
 
-async function getPosts(){
-  const posts = await prisma.post.findMany({
-    where: {published: true},
-    include: {
-      author: {
-        select: {name: true}
-      }
-    }
-  })
-  return posts
-}
-
-export default async function Home() {
-  const posts = await getPosts()
-  console.log(posts)
-
+const LandingPage = () => {
   return (
     <div>
-      <Link href="/add-post">Add Post</Link>
-      {posts.map((post) => (
-        <div key={post.id}>
-          <h1>{post.title}</h1>
-          <p>{post.content}</p>
+      <div className="min-h-screen flex flex-col justify-center items-center">
+        <div className="max-w-4xl mx-auto p-8  rounded-lg shadow-lg">
+          <div className="text-center mb-8">
+            <h1 className="text-5xl font-bold">IronTrack</h1>
+            <p className="mt-6">Welcome to your fully customizable lifting journal.</p>
+          </div>
+
+          <div className="text-center mt-20">
+            <Button className="font-bold py-5 px-4 rounded">
+              <Link href="/create-workout">
+                Create Workout
+              </Link>
+            </Button>
+          </div>
         </div>
-      ))}
+      </div>
     </div>
-  )
-}
+  );
+};
+
+export default LandingPage;

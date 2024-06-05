@@ -26,9 +26,9 @@ const Sidebar = () => {
 
   return (
     <>
-      <Drawer direction="left" >
+      <Drawer direction="left">
         <DrawerTrigger asChild>
-          <Button variant="ghost">Schedule</Button>
+          <Button variant="ghost" className="hover:bg-blue-500 absolute left-4 top-6">Schedule</Button>
         </DrawerTrigger>
         <DrawerContent className="w-1/3 h-full">
           <div className="p-4 pb-0">
