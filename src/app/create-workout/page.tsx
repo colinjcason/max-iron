@@ -17,15 +17,10 @@ import { z } from "zod";
 import { Textarea } from "@/components/ui/textarea";
 
 const FormSchema = z.object({
-  exercise: z.string().min(2, {
+  routineName: z.string().min(2, {
     message: "Exercise must be at least 2 characters.",
   }),
-  sets: z.number().min(1, {
-    message: "Sets must be at least 1.",
-  }),
-  reps: z.number().min(1, {
-    message: "Reps must be at least 1.",
-  }),
+  description: z.string(),
 })
 
 const CreateWorkout = () => {
@@ -34,9 +29,8 @@ const CreateWorkout = () => {
   const form = useForm<z.infer<typeof FormSchema>>({
     resolver: zodResolver(FormSchema),
     defaultValues: {
-      exercise: "",
-      sets: 0,
-      reps: 0,
+      routineName: "",
+      description: "",
     },
   })
 
@@ -55,10 +49,10 @@ const CreateWorkout = () => {
   return (
     <div className="flex flex-col items-center h-full w-full mt-10">
       <Form {...form}>
-        <form onSubmit={form.handleSubmit(onSubmit)} className="flex flex-col space-y-2 justify-center w-1/3">
+        <form onSubmit={form.handleSubmit(onSubmit)} className="flex flex-col space-y-4 justify-center w-1/2 md:w-1/3">
           <FormField
             control={form.control}
-            name="exercise"
+            name="routineName"
             render={({ field }) => (
               <FormItem>
                 <FormLabel>
@@ -71,8 +65,24 @@ const CreateWorkout = () => {
               </FormItem>
             )}
           />
-          <Textarea placeholder="Routine description or progression" className="h-28" />
-          <Button type="submit">Submit</Button>
+          <FormField
+            control={form.control}
+            name="description"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Routine Description</FormLabel>
+                <FormControl>
+                  <Textarea 
+                    placeholder="First week only 2 sets per exercise" 
+                    className="h-28" 
+                    {...field}  
+                  />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+          <Button type="submit" className="w-1/2 self-center">Submit</Button>
         </form>
       </Form>
     </div>
