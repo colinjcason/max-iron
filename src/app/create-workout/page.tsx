@@ -11,24 +11,37 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
+import { useToast } from "@/components/ui/use-toast"
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
+import { Textarea } from "@/components/ui/textarea";
 
 const FormSchema = z.object({
-  username: z.string().min(2, {
-    message: "Username must be at least 2 characters.",
+  exercise: z.string().min(2, {
+    message: "Exercise must be at least 2 characters.",
+  }),
+  sets: z.number().min(1, {
+    message: "Sets must be at least 1.",
+  }),
+  reps: z.number().min(1, {
+    message: "Reps must be at least 1.",
   }),
 })
 
 const CreateWorkout = () => {
+  const { toast } = useToast()
+
   const form = useForm<z.infer<typeof FormSchema>>({
     resolver: zodResolver(FormSchema),
     defaultValues: {
-      username: "",
+      exercise: "",
+      sets: 0,
+      reps: 0,
     },
   })
 
   function onSubmit(data: z.infer<typeof FormSchema>) {
+    console.log(data)
     toast({
       title: "You submitted the following values:",
       description: (
@@ -40,49 +53,26 @@ const CreateWorkout = () => {
   }
 
   return (
-    <div className="flex flex-col items-center justify-center w-full h-full">
+    <div className="flex flex-col items-center h-full w-full mt-10">
       <Form {...form}>
-        <form onSubmit={form.handleSubmit(onSubmit)} className="flex place-content-center w-full h-full items-center space-x-2">
+        <form onSubmit={form.handleSubmit(onSubmit)} className="flex flex-col space-y-2 justify-center w-1/3">
           <FormField
             control={form.control}
-            name="username"
+            name="exercise"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Workout Name</FormLabel>
+                <FormLabel>
+                  <h1 className="text-2xl font-semibold">Routine Name</h1>
+                </FormLabel>
                 <FormControl>
-                  <Input placeholder="Lat Pulldown" {...field} />
+                  <Input placeholder="Ironman Routine" {...field} />
                 </FormControl>
                 <FormMessage />
               </FormItem>
             )}
           />
-          <FormField
-            control={form.control}
-            name="username"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Sets</FormLabel>
-                <FormControl>
-                  <Input placeholder="2" {...field} />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-          <FormField
-            control={form.control}
-            name="username"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Reps</FormLabel>
-                <FormControl>
-                  <Input placeholder="8" {...field} />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-          <Button type="submit" className="align-self-end">Submit</Button>
+          <Textarea placeholder="Routine description or progression" className="h-28" />
+          <Button type="submit">Submit</Button>
         </form>
       </Form>
     </div>

@@ -55,6 +55,7 @@
       @apply border-border;
     }
     body {
+      height: 100vh !important;
       @apply bg-background text-foreground;
     }
     button:focus {
