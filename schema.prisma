@@ -35,6 +35,5 @@ model Exercise {
   reps     Int
   sets     Int
   weight   Float
-  unit     String
   createdAt DateTime @default(now())
 }
