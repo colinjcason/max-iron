@@ -1,4 +1,4 @@
-"use client";
+"use server";
 import { createTask } from "@/app/utils/actions";
 import { useForm } from "react-hook-form";
 import { Button } from "@/components/ui/button";
@@ -17,15 +17,10 @@ import { z } from "zod";
 import { Textarea } from "@/components/ui/textarea";
 
 const FormSchema = z.object({
-  exercise: z.string().min(2, {
+  title: z.string().min(2, {
     message: "Exercise must be at least 2 characters.",
   }),
-  sets: z.number().min(1, {
-    message: "Sets must be at least 1.",
-  }),
-  reps: z.number().min(1, {
-    message: "Reps must be at least 1.",
-  }),
+  description: z.string()
 })
 
 const CreateWorkout = () => {
@@ -34,14 +29,13 @@ const CreateWorkout = () => {
   const form = useForm<z.infer<typeof FormSchema>>({
     resolver: zodResolver(FormSchema),
     defaultValues: {
-      exercise: "",
-      sets: 0,
-      reps: 0,
+      title: "",
+      description: "",
     },
   })
 
   function onSubmit(data: z.infer<typeof FormSchema>) {
-    console.log(data)
+    console.log("submit")
     toast({
       title: "You submitted the following values:",
       description: (
@@ -55,10 +49,10 @@ const CreateWorkout = () => {
   return (
     <div className="flex flex-col items-center h-full w-full mt-10">
       <Form {...form}>
-        <form onSubmit={form.handleSubmit(onSubmit)} className="flex flex-col space-y-2 justify-center w-1/3">
+        <form action={onSubmit} className="flex flex-col space-y-2 justify-center w-1/3">
           <FormField
             control={form.control}
-            name="exercise"
+            name="title"
             render={({ field }) => (
               <FormItem>
                 <FormLabel>
@@ -71,7 +65,7 @@ const CreateWorkout = () => {
               </FormItem>
             )}
           />
-          <Textarea placeholder="Routine description or progression" className="h-28" />
+          <Textarea placeholder="Routine description or progression" className="h-28" name="description" />
           <Button type="submit">Submit</Button>
         </form>
       </Form>
