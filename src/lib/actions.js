@@ -1,7 +1,7 @@
 "use server";
 import prisma from "@/lib/prisma";
 
-export const createTask = async (formData) => {
+export const createExercise = async (formData) => {
   const name = formData.get("name");
   await prisma.user.create({
     data: {
@@ -9,3 +9,7 @@ export const createTask = async (formData) => {
     },
   });
 };
+
+export const getAllExercises = async () => {
+  await prisma.exercise.get()
+}
