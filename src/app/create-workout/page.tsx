@@ -29,6 +29,12 @@ const CreateWorkout = () => {
     setExerciseList([...exerciseList, { exercise: '' }])
   }
 
+  const handleRemoveExercise = (index: number) => {
+    const list = [...exerciseList]
+    list.splice(index, 1)
+    setExerciseList(list)
+  }
+
   return (
     <div className="mx-auto max-w-3xl px-4 py-8">
       <div className="mb-6">
@@ -55,6 +61,7 @@ const CreateWorkout = () => {
               <TableHead className="px-4 py-2 text-right">Sets</TableHead>
               <TableHead className="px-4 py-2 text-right">Reps</TableHead>
               <TableHead className="px-4 py-2 text-right">Weight</TableHead>
+              <TableHead className="px-4 py-2 text-right"></TableHead>
             </TableRow>
           </TableHeader>
           <TableBody>
@@ -79,6 +86,9 @@ const CreateWorkout = () => {
                   <Input
                     type="number"
                   />
+                </TableCell>
+                <TableCell>
+                  <Button variant="secondary" onClick={() => handleRemoveExercise(index)}>X</Button>
                 </TableCell>
               </TableRow>
             ))}
