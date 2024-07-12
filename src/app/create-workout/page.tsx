@@ -8,11 +8,10 @@ import { useState } from "react"
 import {
   Table,
   TableBody,
-  TableCaption,
-  TableCell,
   TableHead,
   TableHeader,
   TableRow,
+  TableCell,
 } from "@/components/ui/table"
 
 const formatDate = (date: Date) => {
@@ -24,6 +23,11 @@ const formatDate = (date: Date) => {
 const CreateWorkout = () => {
   const [date, setDate] = useState<Date | undefined>(new Date())
   const [isPopoverOpen, setIsPopoverOpen] = useState<Boolean>(false)
+  const [exerciseList, setExerciseList] = useState<Object[]>([{ exercise: '' }])
+
+  const handleAddExercise = () => {
+    setExerciseList([...exerciseList, { exercise: '' }])
+  }
 
   return (
     <div className="mx-auto max-w-3xl px-4 py-8">
@@ -54,43 +58,35 @@ const CreateWorkout = () => {
             </TableRow>
           </TableHeader>
           <TableBody>
-            {exercises.map((exercise, index) => (
-              <tr key={index} className="border-b">
-                <td className="px-4 py-2">
+            {exerciseList.map((exercise, index) => (
+              <TableRow key={index} className="border-b">
+                <TableCell className="px-4 py-2">
                   <Input
                     type="text"
-                    value={exercise.exercise}
-                    onChange={(e) => updateExercise(index, "exercise", e.target.value)}
                   />
-                </td>
-                <td className="px-4 py-2 text-right">
+                </TableCell>
+                <TableCell className="px-4 py-2 text-right">
                   <Input
                     type="number"
-                    value={exercise.sets}
-                    onChange={(e) => updateExercise(index, "sets", Number(e.target.value))}
                   />
-                </td>
-                <td className="px-4 py-2 text-right">
+                </TableCell>
+                <TableCell className="px-4 py-2 text-right">
                   <Input
                     type="number"
-                    value={exercise.reps}
-                    onChange={(e) => updateExercise(index, "reps", Number(e.target.value))}
                   />
-                </td>
-                <td className="px-4 py-2 text-right">
+                </TableCell>
+                <TableCell className="px-4 py-2 text-right">
                   <Input
                     type="number"
-                    value={exercise.weight}
-                    onChange={(e) => updateExercise(index, "weight", Number(e.target.value))}
                   />
-                </td>
-              </tr>
+                </TableCell>
+              </TableRow>
             ))}
           </TableBody>
         </Table>
       </div>
       <div className="mt-4 flex justify-end">
-        <Button>Add Exercise</Button>
+        <Button onClick={handleAddExercise}>Add Exercise</Button>
       </div>
     </div>
   );
