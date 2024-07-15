@@ -13,6 +13,7 @@ import {
   TableRow,
   TableCell,
 } from "@/components/ui/table"
+import {getAllExercises} from '@/lib/actions'
 
 const formatDate = (date: Date) => {
   if (!date) return '';
@@ -21,6 +22,8 @@ const formatDate = (date: Date) => {
 }
 
 const CreateWorkout = () => {
+  const exercises = getAllExercises()
+  console.log(exercises)
   const [date, setDate] = useState<Date | undefined>(new Date())
   const [isPopoverOpen, setIsPopoverOpen] = useState<Boolean>(false)
   const [exerciseList, setExerciseList] = useState<Object[]>([{ exercise: '' }])
@@ -65,8 +68,8 @@ const CreateWorkout = () => {
             </TableRow>
           </TableHeader>
           <TableBody>
-            {exerciseList.map((exercise, index) => (
-              <TableRow key={index} className="border-b">
+            {/* {exercises.map((exercise, index) => (
+              <TableRow key={index}>
                 <TableCell className="px-4 py-2">
                   <Input
                     type="text"
@@ -91,7 +94,7 @@ const CreateWorkout = () => {
                   <Button variant="secondary" onClick={() => handleRemoveExercise(index)}>X</Button>
                 </TableCell>
               </TableRow>
-            ))}
+            ))} */}
           </TableBody>
         </Table>
       </div>
