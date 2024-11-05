@@ -11,5 +11,5 @@ export const createExercise = async (formData) => {
 };
 
 export const getAllExercises = async () => {
-  await prisma.exercise.findMany()
+  return await prisma.exercise.findMany()
 }

@@ -23,7 +23,6 @@ const formatDate = (date: Date) => {
 
 const CreateWorkout = () => {
   const exercises = getAllExercises()
-  console.log(exercises)
   const [date, setDate] = useState<Date | undefined>(new Date())
   const [isPopoverOpen, setIsPopoverOpen] = useState<Boolean>(false)
   const [exerciseList, setExerciseList] = useState<Object[]>([{ exercise: '' }])
