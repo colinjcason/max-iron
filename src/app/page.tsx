@@ -1,4 +1,5 @@
 import { Button } from "@/components/ui/button";
+import { GoogleLoginButton } from "@/components/google-login-button";
 import Link from "next/link";
 
 const LandingPage = () => {
@@ -17,6 +18,7 @@ const LandingPage = () => {
                 Create Workout
               </Link>
             </Button>
+            <GoogleLoginButton />
           </div>
         </div>
       </div>

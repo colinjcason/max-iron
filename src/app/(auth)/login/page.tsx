@@ -7,6 +7,7 @@ import { Input } from "@/components/ui/input"
 import { Card, CardHeader, CardContent, CardFooter } from "@/components/ui/card"
 import { Label } from "@/components/ui/label"
 import { Icons } from "@/components/icons"
+import { GoogleLoginButton } from "@/components/google-login-button"
 
 const LoginPage = () => {
   const [isLoading, setIsLoading] = useState<boolean>(false)
@@ -25,7 +26,7 @@ const LoginPage = () => {
 
   return (
     <div className="flex items-center justify-center min-h-screen">
-      <Card className="w-full max-w-md">
+      <Card className="w-full max-w-md shadow-2xl">
         <CardHeader className="space-y-1">
           <h2 className="text-2xl font-bold text-center">Welcome back</h2>
           <p className="text-sm text-muted-foreground text-center">
@@ -65,6 +66,7 @@ const LoginPage = () => {
               )}
               Sign in
             </Button>
+            <GoogleLoginButton />
             <div className="text-sm text-center text-muted-foreground">
               Don&apos;t have an account?{" "}
               <a 

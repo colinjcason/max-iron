@@ -9,6 +9,7 @@ import { Icons } from "@/components/icons"
 import { signIn } from "next-auth/react"
 import { useRouter } from "next/navigation"
 import { useSession } from "next-auth/react"
+import { GoogleLoginButton } from "@/components/google-login-button"
 
 const LoginPage = () => {
   const [isLoading, setIsLoading] = useState<boolean>(false)
@@ -89,18 +90,7 @@ const LoginPage = () => {
               )}
               Register with Email
             </Button>
-
-            <Button
-              className="w-full"
-              onClick={handleGoogleSignIn}
-              disabled={isLoading}
-              type="button"
-            >
-              {isLoading && (
-                <Icons.spinner className="mr-2 h-4 w-4 animate-spin" />
-              )}
-              Sign in with Google
-            </Button>
+            <GoogleLoginButton />
           </CardFooter>
         </form>
       </Card>
