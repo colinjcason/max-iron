@@ -1,16 +1,18 @@
 "use client"
 
-import { signOut } from "next-auth/react"
+import { signOut, useSession } from "next-auth/react"
 import { Button } from "@/components/ui/button"
 import { useRouter } from "next/navigation"
 
 export default function DashboardPage() {
   const router = useRouter()
+  const { data: session, status } = useSession()
+
   const handleSignOut = async () => {
     try {
       await signOut({ 
-        callbackUrl: "/login",
-        redirect: false 
+        callbackUrl: "/",
+        redirect: false
       })
       // Force a hard reload of the page
       window.location.href = "/login"
@@ -18,6 +20,10 @@ export default function DashboardPage() {
       console.error("Error signing out:", error)
     }
   }
+
+  console.log("Session data:", session)
+  console.log("Auth status:", status)
+
   return (
     <div className="flex flex-col items-center justify-center">
       <h1 className="text-4xl font-bold">Dashboard</h1>

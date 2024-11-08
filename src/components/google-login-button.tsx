@@ -3,11 +3,10 @@
 import { Button } from "@/components/ui/button"
 import { Icons } from "@/components/icons"
 import { useState } from "react"
-import { signIn, useSession } from "next-auth/react"
+import { signIn } from "next-auth/react"
 
 export function GoogleLoginButton() {
   const [isLoading, setIsLoading] = useState<boolean>(false)
-  const { data: session, status } = useSession()
 
   const handleGoogleSignIn = async () => {
     setIsLoading(true)
@@ -20,9 +19,7 @@ export function GoogleLoginButton() {
     }
   }
 
-  console.log("Session data:", session)
-  console.log("Auth status:", status)
-
+  
   return (
     <Button
       className="w-full m-6"
