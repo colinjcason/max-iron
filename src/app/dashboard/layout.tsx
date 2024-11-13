@@ -1,5 +1,7 @@
 import { auth } from "@/lib/auth"
 import { redirect } from "next/navigation"
+import Sidebar from "@/components/Sidebar"
+import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar"
 
 export default async function DashboardLayout({
   children,
@@ -13,8 +15,12 @@ export default async function DashboardLayout({
   }
 
   return (
-    <div className="container mx-auto p-4">
-      {children}
-    </div>
+    <SidebarProvider>
+      <Sidebar />
+      <main>
+        <SidebarTrigger />
+        {children}
+      </main>
+    </SidebarProvider>
   )
 }

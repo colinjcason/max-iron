@@ -22,7 +22,6 @@ export default function DashboardPage() {
   }
 
   console.log("Session data:", session)
-  console.log("Auth status:", status)
 
   return (
     <div className="flex flex-col items-center justify-center">
@@ -30,7 +29,7 @@ export default function DashboardPage() {
       <div className="mt-6">
         <p>Welcome to your dashboard</p>
       </div>
-      <Button onClick={handleSignOut}>Sign Out</Button>
+      <Button onClick={handleSignOut}>Log Out</Button>
     </div>
   )
 }

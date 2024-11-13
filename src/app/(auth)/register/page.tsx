@@ -27,17 +27,6 @@ const LoginPage = () => {
     }, 3000)
   };
 
-  const handleGoogleSignIn = async () => {
-    setIsLoading(true)
-    try {
-      await signIn("google")
-    } catch (error) {
-      console.error("Error signing in with Google:", error)
-    } finally {
-      setIsLoading(false)
-    }
-  };
-
   useEffect(() => {
     if (status === "authenticated") {
       router.push("/dashboard")
